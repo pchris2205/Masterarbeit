@@ -1,0 +1,10 @@
+#!/bin/sh
+cd ${0%/*} || exit 1                        # Run from this directory
+python ./obstacles.py;
+cat obstacles.stl channel.stl > chip_cooling.stl;
+surfaceFeatureEdges chip_cooling.stl chip_cooling.fms;
+cartesianMesh;
+checkMesh -constant;
+decomposePar;
+touch foam.foam
+#------------------------------------------------------------------------------
